@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
+import gsap from 'gsap'
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -30,3 +31,56 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
+
+// using theejs vanilla
+// time variable
+
+/*
+const clock = new THREE.Clock()
+
+// Animations
+const tick = () => {
+
+    // standardize the animation
+    const delta = clock.getElapsedTime()
+
+    // Update object poition
+    mesh.rotation.z = delta * Math.PI
+    mesh.position.y = Math.sin(delta)
+    mesh.position.x = Math.cos(delta)
+
+    // Render
+    renderer.render(scene, camera)
+
+    // Request new frame
+    requestAnimationFrame(tick)
+}
+
+tick()
+
+//*/
+
+// using greensock library
+
+gsap.to(mesh.position, {
+    duration: 1,
+    delay: 1,
+    x: 2
+})
+
+gsap.to(mesh.position, {
+    duration: 1,
+    delay: 2,
+    x: 0
+})
+
+const tick = () =>
+{
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
+}
+
+tick()
